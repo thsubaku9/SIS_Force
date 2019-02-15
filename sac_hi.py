@@ -1,5 +1,3 @@
-#reg no-140905542
-#date format-dd/mm/yyyy
 import requests , bs4 , sys, datetime, time
 import textdetect
 regNo=None
